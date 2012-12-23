@@ -1,0 +1,5 @@
+Start the container with automatic reload:
+
+In SBT:
+~;container:start; container:reload /
+

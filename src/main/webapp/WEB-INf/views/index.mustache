@@ -1,0 +1,40 @@
+<html>
+<head><title>Cashflow</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/js/cashflow.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/jquery.dataTables.css"/>
+</head>
+<body>
+<table id="transactions">
+    <thead>
+    <tr>
+        <th>date</th>
+        <th>ownAccount</th>
+        <th>counterAccount</th>
+        <th>debetCredit</th>
+        <th>amount</th>
+        <th>toAccountName</th>
+        <th>description</th>
+        <th>code</th>
+        <th>balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#transactions}}
+    <tr>
+        <td>{{date}}</td>
+        <td>{{ownAccount}}</td>
+        <td>{{counterAccount}}</td>
+        <td>{{debetCredit}}</td>
+        <td>{{amount}}</td>
+        <td>{{toAccountName}}</td>
+        <td style="width: 20%">{{description}}</td>
+        <td>{{code}}</td>
+        <td>{{balance}}</td>
+    </tr>
+    {{/transactions}}
+    </tbody>
+</table>
+</body>
+</html>
