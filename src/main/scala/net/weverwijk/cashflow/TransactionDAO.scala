@@ -17,14 +17,14 @@ class TransactionDAO {
     getTransactions map(x => (formatMonth.format(x.date) -> x.amount)) groupBy(x => x._1) mapValues(_.map(_._2).sum)
   }
 
-  def getBalanceByMonth : Seq[(String, Double)]= {
-    getTransactionsWithBalance filter(x => x.ownAccount equalsIgnoreCase "123") map(x => (formatMonth.format(x.date) -> x.balance)) groupBy(x => x._1) flatMap(e=> List(e._2.head)) toSeq
+  def getBalanceByMonth : Seq[(String, Transaction)]= {
+    getTransactionsWithBalance filter(x => x.ownAccount equalsIgnoreCase "0159274230") map(x => (formatMonth.format(x.date) -> x)) groupBy(x => x._1) flatMap(e=> List(e._2.head)) toSeq
   }
 
   def getTransactionsWithBalance = {
     val transactions: Seq[Transaction] = getTransactions.reverse
-    val transactionsCheckingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "123")
-    val transactionsSavingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "456")
+    val transactionsCheckingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "0159274230")
+    val transactionsSavingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "1592177026")
 
     def calculateBalance(transactionsToMap : Seq[Transaction]) : Seq[Transaction] = {
       var seq = Seq[Transaction]()

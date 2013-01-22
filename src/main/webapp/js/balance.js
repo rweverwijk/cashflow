@@ -36,7 +36,7 @@ var svg = d3.select("body").append("svg")
 d3.json("balanceByMonth", function (error, data) {
   data.forEach(function (d) {
     d._1 = parseDate(d._1);
-    d._2 = +d._2;
+    d._2 = +d._2.balance;
   });
 
   x.domain(d3.extent(data, function (d) {return d._1;}));
