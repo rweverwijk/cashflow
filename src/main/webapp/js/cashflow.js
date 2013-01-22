@@ -1,7 +1,8 @@
-$(document).ready(function() {
-    $('#transactions').dataTable({
-        "bPaginate": false,
-        "aaSorting": []
-    });
+$(document).ready(function () {
+  $('#transactions').dataTable({
+    "bPaginate": false,
+    "aaSorting": []
+  });
 
-} );
+
+});

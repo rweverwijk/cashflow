@@ -21,3 +21,5 @@ libraryDependencies ++= Seq(
 resolvers ++= Seq("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
                     "releases"  at "https://oss.sonatype.org/content/repositories/releases",
                     "Java.net Maven2 Repository" at "http://download.java.net/maven/2/")
+
+port in container.Configuration := 8085

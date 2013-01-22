@@ -32,7 +32,7 @@ class WebApp extends ScalatraServlet with ScalateSupport {
   }
 
   get("/transactions") {
-    val fs = new TransactionDAO().getTransactions
+    val fs = new TransactionDAO().getTransactionsWithBalance
     val json = decompose(fs)
     pretty(render(json))
   }
@@ -43,9 +43,9 @@ class WebApp extends ScalatraServlet with ScalateSupport {
     pretty(render(json))
   }
 
-  get("/transactionsWithBalance") {
-    val fs = new TransactionDAO().getTransactionsWithBalance
-    val json = decompose(fs)
+  get("/balanceByMonth") {
+    val fs = new TransactionDAO().getBalanceByMonth sortBy(r=> (r._1))
+    val json = decompose(fs);
     pretty(render(json))
   }
 
@@ -53,4 +53,10 @@ class WebApp extends ScalatraServlet with ScalateSupport {
     contentType="text/html"
     mustache("index", ("transactions" -> new TransactionDAO().getTransactionsWithBalance))
   }
+
+  get("/balanceHTML") {
+    contentType="text/html"
+    mustache("balance")
+  }
+
 }

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat
 class TransactionDAO {
 
   val formatMonth: SimpleDateFormat = new SimpleDateFormat("yyyyMM")
+  val formatDay: SimpleDateFormat = new SimpleDateFormat("yyyyMMdd")
 
   def getTransactions : Seq[Transaction] = {
     Source.fromFile("/Users/rvanweverwijk/Documents/prive/rekeninggegevens.csv", "UTF-8").getLines().map(x => Transaction(x)).toSeq
@@ -16,12 +17,14 @@ class TransactionDAO {
     getTransactions map(x => (formatMonth.format(x.date) -> x.amount)) groupBy(x => x._1) mapValues(_.map(_._2).sum)
   }
 
+  def getBalanceByMonth : Seq[(String, Double)]= {
+    getTransactionsWithBalance filter(x => x.ownAccount equalsIgnoreCase "123") map(x => (formatMonth.format(x.date) -> x.balance)) groupBy(x => x._1) flatMap(e=> List(e._2.head)) toSeq
+  }
+
   def getTransactionsWithBalance = {
     val transactions: Seq[Transaction] = getTransactions.reverse
-    val transactionsCheckingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "0159274230")
-    val transactionsSavingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "1592177026")
-
-
+    val transactionsCheckingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "123")
+    val transactionsSavingAccount = transactions.filter(x => x.ownAccount equalsIgnoreCase "456")
 
     def calculateBalance(transactionsToMap : Seq[Transaction]) : Seq[Transaction] = {
       var seq = Seq[Transaction]()
